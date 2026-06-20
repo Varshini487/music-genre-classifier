@@ -1,9 +1,9 @@
 streamlit
 librosa
-tensorflow
-keras
-numpy
 matplotlib
 scikit-learn
-pandas
-soundfile
+numpy
+tensorflow
+keras
+Pillow
+scipy
