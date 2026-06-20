@@ -1,46 +1,36 @@
 # 🎵 Music Genre Classifier
 
-Classify music genre (Rock, Pop, Classical, Hip-Hop, Jazz, Blues, Country, Reggae) from raw audio waveforms using Convolutional Neural Networks.
+Classify music genre (Rock, Pop, Classical, Hip-Hop, Jazz, etc.) from audio using CNN on Mel-Spectrograms.
 
-## Challenge
-Raw audio is 44,100+ samples per second. A 3-minute song = 7.9M samples. CNNs need structured input.
+## 🧠 How It Works
+1. Convert 30-second audio to Mel-Spectrogram (frequency × time image)
+2. ResNet50 CNN processes the spectrogram as an image
+3. Output: genre probabilities
 
-## Solution: Spectrogram
-- Convert time-domain audio → frequency-domain spectrogram
-- Apply Short-Time Fourier Transform (STFT)
-- Spectrogram = 2D image (frequency × time)
-- CNNs love images → classify genres
+## 🎵 Supported Genres
+Rock, Pop, Classical, Hip-Hop, Jazz, Metal, Ambient, Electronic
 
-## Architecture
+## 📊 Performance
+- Accuracy: 88%
+- Model: ResNet50 (transfer learning from ImageNet)
+- Dataset: GTZAN (1,000 songs across 10 genres)
+
+## 🛠️ Tech Stack
+- **librosa** – STFT, Mel-Spectrogram extraction
+- **TensorFlow/Keras** – ResNet50 model
+- **Matplotlib** – visualization
+- **Streamlit** – web interface
+
+## 🚀 Getting Started
+```bash
+git clone https://github.com/Varshini487/music-genre-classifier
+cd music-genre-classifier
+pip install -r requirements.txt
+streamlit run app.py
 ```
-Raw Audio (44.1kHz)
-    ↓
-STFT → Mel-Spectrogram (128 × 646)
-    ↓
-ResNet50 (pre-trained on ImageNet)
-    ↓
-Fine-tune last 2 layers on GTZAN dataset
-    ↓
-8-class genre classifier
-```
 
-## Dataset
-- GTZAN Genre Collection: 1,000 30-second clips (10 genres)
-- Mel-Spectrogram: 128 frequency bins, 646 time steps
-
-## Tech Stack
-- **librosa** – audio loading + mel-spectrogram
-- **TensorFlow/Keras** – ResNet50 fine-tuning
-- **Matplotlib** – spectrogram visualization
-- **Streamlit** – upload interface
-
-## Performance
-- Accuracy: 88% on test set
-- Confusion matrix: Pop/Rock often confused (similar instruments)
-- Classical/Jazz well-separated (distinct frequency distributions)
-
-## Use Cases
-- Music streaming platform recommendations
-- Automated music library tagging
-- DJ mix analysis
-- Music education tools (identify genre by ear)
+## 💡 Use Cases
+- Music streaming (auto-categorization)
+- DJ/radio automation
+- Music recommendation systems
+- Podcast episode type detection
